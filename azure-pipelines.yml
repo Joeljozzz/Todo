@@ -17,7 +17,7 @@ jobs:
     steps:
       - task: Docker@2
         inputs:
-          containerRegistry: 'myACRServiceConnection'  # Your ACR service connection name
+          containerRegistry: 'JoelJoselabfordevops'  # Your ACR service connection name
           repository: 'assignment1files-server'
           command: 'buildAndPush'
           dockerfile: '**/Dockerfile'
