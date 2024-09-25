@@ -1,8 +1,8 @@
 trigger:
-- master  # Triggers the pipeline on push to the master branch
+- master
 
 pool:
-  vmImage: 'ubuntu-latest'  # Using Ubuntu for the pipeline jobs
+  vmImage: 'ubuntu-latest'
 
 jobs:
 - job: Build
@@ -10,10 +10,10 @@ jobs:
   steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'ACRServiceConnection'  # ACR service connection name
-        repository: 'assignment1files-server'  # Docker repository in ACR
-        command: 'buildAndPush'  # Builds and pushes the Docker image to ACR
-        Dockerfile: '**/Dockerfile'  # Path to your Dockerfile
+        containerRegistry: 'DockerACRServiceConnection'  # Use the exact name of your Docker Registry service connection
+        repository: 'assignment1files-server'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
         tags: |
           latest
 
@@ -23,7 +23,6 @@ jobs:
   steps:
     - task: AzureWebAppContainer@1
       inputs:
-        azureSubscription: 'AzureResourceConnection'  # Azure service connection name
-        appName: 'ASP-Todoappgroup-acde'  # Your Azure App Service name
-        imageName: 'joeljoselabfordevops.azurecr.io/assignment1files-server:latest'  # ACR image reference
-        containerCommand: ''  # Optional command to run inside the container
+        azureSubscription: 'AzureResourceConnection'  # Your Azure subscription service connection name
+        appName: 'ASP-Todoappgroup-acde'
+        imageName: 'joeljoselabfordevops.azurecr.io/assignment1files-server:latest'
