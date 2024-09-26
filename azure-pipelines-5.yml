@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: '5480a9f4-e2dc-4e26-945c-220d932be407'
   imageRepository: 'joeljozzztodo'
   containerRegistry: 'joeljoselabfordevops.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/docker-compose.yml'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
