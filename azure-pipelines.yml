@@ -4,24 +4,22 @@ trigger:
 pool: my local machine
 
 jobs:
-- job: Build
+- job: BuildAndPush
   displayName: 'Build and Push Docker Image'
   steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'DockerACRServiceConnection'  # Use the exact name of your Docker Registry service connection
+        containerRegistry: 'JoelJoselabfordevops'  # Your ACR service connection
         repository: 'assignment1files-server'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: |
-          latest
+        Dockerfile: '**/Dockerfile'  # Ensure this path is correct
 
 - job: Deploy
-  displayName: 'Deploy to Azure App Service'
-  dependsOn: Build
+  displayName: 'Deploy to Azure Container Apps'
+  dependsOn: BuildAndPush
   steps:
-    - task: AzureWebAppContainer@1
+    - task: AzureContainerApps@1
       inputs:
-        azureSubscription: 'AzureResourceConnection'  # Your Azure subscription service connection name
-        appName: 'Todoapp'
-        imageName: 'joeljoselabfordevops.azurecr.io/assignment1files-server:latest'
+        azureSubscription: 'Azure for Students(b1b14045-d8e1-4487-ae1d-198d8f4c6aa6)'  # Your Azure subscription service connection name
+        acrName: 'JoelJoselabfordevops'
+        imageName: 'joeljoselabfordevops.azurecr.io/assignment1files-server:latest'  # Use the image that was pushed
