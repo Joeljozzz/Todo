@@ -30,6 +30,6 @@ jobs:
     - task: AzureWebAppContainer@1
       displayName: 'Deploy to Azure Web App'
       inputs:
-        azureSubscription: 'Azure for Students(b1b14045-d8e1-4487-ae1d-198d8f4c6aa6)'  # Your Azure subscription service connection
-        appName: 'YourWebAppName'  # Name of your Azure Web App
-        imageName: 'joeljoselabfordevops.azurecr.io/assignment1files-server:latest'  # Image reference
+        azureSubscription: 'Azure for Students(b1b14045-d8e1-4487-ae1d-198d8f4c6aa6)'
+        appName: 'Todoapp'
+        containers: 'joeljoselabfordevops.azurecr.io/assignment1files-server:latest'
