@@ -5,7 +5,7 @@
 trigger:
 - master
 
-pool: my local machine
+pool: 'my local machine'
 
 
 resources:
