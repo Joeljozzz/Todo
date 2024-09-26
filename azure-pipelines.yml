@@ -23,5 +23,5 @@ jobs:
     - task: AzureWebAppContainer@1
       inputs:
         azureSubscription: 'AzureResourceConnection'  # Your Azure subscription service connection name
-        appName: 'ASP-Todoappgroup-acde'
+        appName: 'Todoapp'
         imageName: 'joeljoselabfordevops.azurecr.io/assignment1files-server:latest'
