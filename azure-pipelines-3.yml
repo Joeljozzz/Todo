@@ -5,6 +5,7 @@
 trigger:
 - master
 
+
 resources:
 - repo: self
 
@@ -16,8 +17,6 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/docker-compose.yml'
   tag: '$(Build.BuildId)'
 
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
@@ -25,8 +24,7 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      vmImage: $(vmImageName)
+    pool: my local machine
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
