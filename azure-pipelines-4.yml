@@ -1,0 +1,35 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:  my local machine
+
+jobs:
+- job: BuildAndDeploy
+  displayName: 'Build Docker Image and Deploy to Azure Web App'
+  steps:
+    # Checkout the code from the repository
+    - checkout: self
+
+    # Build and push the Docker image
+    - task: Docker@2
+      displayName: 'Build and Push Docker Image'
+      inputs:
+        containerRegistry: 'JoelJoselabfordevops'  # Your ACR service connection
+        repository: 'assignment1files-server'  # Your image repository name
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'  # Path to your Dockerfile
+        tags: |
+          latest  # Tag for the image
+
+    # Deploy to Azure Web App
+    - task: AzureWebAppContainer@1
+      displayName: 'Deploy to Azure Web App'
+      inputs:
+        azureSubscription: 'Azure for Students(b1b14045-d8e1-4487-ae1d-198d8f4c6aa6)'  # Your Azure subscription service connection
+        appName: 'YourWebAppName'  # Name of your Azure Web App
+        imageName: 'joeljoselabfordevops.azurecr.io/assignment1files-server:latest'  # Image reference
